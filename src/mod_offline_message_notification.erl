@@ -23,5 +23,5 @@ on_offline_message(Sender, Recipient, Packet) ->
     URL = os:getenv("NOTIFICATION_SERVICE_BASE_URL") ++ "/notifications/send/offlinemessage",
     Type = "application/json",
     Body = "{\"senderUserId\": \"" ++ Sender#jid.luser ++ "\", \"recipientUserId\": \"" ++ Recipient#jid.luser ++ "\", \"message\": \"" ++ Packet ++ "\"}",
-    httpc:request(post, {URL, Headers, Type, Body}, [], []),
+    httpc:request(post, {URL, [], Type, Body}, [], []),
     ?INFO_MSG("Sent offline message notification request to ~p, with body: ~p", [URL, Body]).
